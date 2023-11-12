@@ -7,6 +7,6 @@ class Validator {
     validateMenuPattern(menu) {
         let pattern =  /^[ㄱ-ㅎ|가-힣]+[-]+\d$/;
         if(pattern.test(menu) === false) throw new Error(`${ERROR.MENU_PATTERN_ERROR}`);
-    }
+     }
 }
 export default Validator;
