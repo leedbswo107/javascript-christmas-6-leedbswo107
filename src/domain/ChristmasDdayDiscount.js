@@ -6,7 +6,7 @@ class ChristmasDdayDiscount {
         const dDay = new Object();
         if(day >= NUMBER.eventStart && day <= NUMBER.CHRISTMASDAYEVENT.endDate){
             for(let i = 1; i < day; i++) discountAmount += NUMBER.CHRISTMASDAYEVENT.dayBydayPlus;
-            dDay['크리스마스 디데이 할인'] = discountAmount;
+            dDay['크리스마스 디데이 할인'] = Number(discountAmount);
             return dDay;
         }
         return 0;
