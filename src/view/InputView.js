@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "../static/message.js";
 import Validator from "../common/Validator.js";
+import OrderMenu from "../domain/OrderMenu.js";
 class InputView {
     constructor() {
         this.validator = new Validator(); 
@@ -12,14 +13,21 @@ class InputView {
                 this.validator.validateVisitDate(visitDate);
                 return visitDate;
             } catch(e) {
-                Console.print(`${e}`);
+                await Console.print(`${e}`);
             }
         }
     }
     async orderMenu() {
-        const orderMenu = await Console.readLineAsync(`${INPUT_MESSAGE.orderMenu}`);
-        this.validator.validateMenuPattern(orderMenu);
-        return orderMenu;
+        while(true) {
+            try {
+                const orderMenu = await Console.readLineAsync(`${INPUT_MESSAGE.orderMenu}`);
+                this.orderMenu = new OrderMenu(orderMenu);
+                this.dividedMenu = await this.orderMenu.getMenu();
+                return this.dividedMenu;
+            } catch (e) {
+                await Console.print(`${e}`);
+            }    
+        }
     }
     // ...
 }
