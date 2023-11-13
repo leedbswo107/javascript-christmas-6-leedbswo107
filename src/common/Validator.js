@@ -32,12 +32,12 @@ class Validator {
     validateOrderAmount(amount) {
         const menuAmount = Object.values(amount);
         const count = menuAmount.reduce((total, element) => total + element, 0);
-        if(count > NUMBER.maxAmount) throw new Error("[ERROR] 얼마나 먹는거야 이 돼지 같은놈 !!");
+        if(count > NUMBER.maxAmount) throw new Error(`${ERROR.MENU_ERROR}`);
     }
     validateMinAmount(amount) {
         const menuMinAmount = Object.values(amount);
         menuMinAmount.forEach(element => {
-            if(element <= 0) throw new Error("[ERROR] 최소 1이상이여야 합니다.");
+            if(element <= 0) throw new Error(`${ERROR.MENU_ERROR}`);
         });
     }
 }
