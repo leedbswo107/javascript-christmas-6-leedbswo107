@@ -15,9 +15,9 @@ class OutputView {
             console.log(`${key} ${menu[key]}${OUTPUT_MESSAGE.quantity}`);
         }
     }
-    printTotalPriceBeforeDiscount() {
+    printTotalPriceBeforeDiscount(price) {
         Console.print(`${OUTPUT_MESSAGE.totalPriceBeforeDiscount}`);
-        
+        Console.print(`${price}${OUTPUT_MESSAGE.won}`);
     }
     printGiveAwayMenu() {
         Console.print(`${OUTPUT_MESSAGE.giveAwayMenu}`);
