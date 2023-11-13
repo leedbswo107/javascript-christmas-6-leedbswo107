@@ -9,7 +9,7 @@ class InputView {
     async visitDate() {
         while(true){
             try{
-                const visitDate = await Console.readLineAsync(`${INPUT_MESSAGE.visitDay}`);
+                const visitDate = Number(await Console.readLineAsync(`${INPUT_MESSAGE.visitDay}`));
                 this.validator.validateVisitDate(visitDate);
                 return visitDate;
             } catch(e) {
