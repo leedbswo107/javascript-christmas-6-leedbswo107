@@ -11,7 +11,7 @@ class WeekdayDiscount {
         let dessertCount = this.weekdayDessertCount.dessertCount(dessert);
         if(NUMBER.weekday.includes(day) === true) {
             weekdayDiscountTotal = (NUMBER.weekdayDiscount)*dessertCount;
-            weekday['평일 할인'] = weekdayDiscountTotal;
+            weekday['평일 할인'] = Number(weekdayDiscountTotal);
             return weekday;
         }
         return 0;
