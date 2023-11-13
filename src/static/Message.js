@@ -19,5 +19,10 @@ const OUTPUT_MESSAGE = Object.freeze({
     quantity : "개",
     // 콤마가 필요한 경우 여기서
 });
+const BADGE = Object.freeze({
+    star : '별',
+    tree : '트리',
+    santa : '산타',
+})
 
-export {INPUT_MESSAGE, OUTPUT_MESSAGE};
+export {INPUT_MESSAGE, OUTPUT_MESSAGE, BADGE};
