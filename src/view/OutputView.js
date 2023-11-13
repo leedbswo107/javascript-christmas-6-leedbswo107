@@ -24,29 +24,29 @@ class OutputView {
         if(gift === 0) Console.print(OUTPUT_MESSAGE.none);
         else Console.print(`${Object.keys(gift)} ${Object.values(gift)}${OUTPUT_MESSAGE.quantity}`)
     }
-    printBenefitDetails() {
+    //함수 분리 필요 함
+    printBenefitDetails(dday,weekday,weekend,special) {
         Console.print(`${OUTPUT_MESSAGE.benefitDetails}`);
-        
+        if(dday !== 0) Console.print(`${Object.keys(dday)}: -${Object.values(dday).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
+        if(weekday !== 0) Console.print(`${Object.keys(weekday)}: -${Object.values(weekday).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
+        if(weekend !== 0) Console.print(`${Object.keys(weekend)}: -${Object.values(weekend).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
+        if(special !== 0) Console.print(`${Object.keys(special)}: -${Object.values(special).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
+        else Console.print(OUTPUT_MESSAGE.none);
     }
-    printTotalBenefitPrice() {
+    //if 절 분리 필요
+    printTotalBenefitPrice(total) {
         Console.print(`${OUTPUT_MESSAGE.totalBenefitPrice}`);
-
+        if(total === 0) Console.print(OUTPUT_MESSAGE.none);
+        else Console.print(`-${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
     }
-    printTotalPriceAfterDiscount() {
+    printTotalPriceAfterDiscount(price) {
         Console.print(`${OUTPUT_MESSAGE.totalPriceAfterDiscount}`);
-
+        Console.print(`${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
     }
-    printBadge() {
+    printBadge(badge) {
         Console.print(`${OUTPUT_MESSAGE.badge}`);
+        if(badge === 0) Console.print(`${OUTPUT_MESSAGE.none}`);
+        else Console.print(`${badge}`);
     }
-    // menu 값을 객체로 받을지 배열로 받을지에 따라 menu, amount 가 각각의 배열로 오거나
-    // 하나의 객체로 key value로 나눌지 생각 하고 결정 예정.
-    // ...
 }
-// 객체 키와 값을 출력하는 방법.
-// for (const key in PRICE.APPETIZER) {
-//     const value = PRICE.APPETIZER[key];
-//     Console.print(key);
-//     Console.print(value);
-// }
 export default OutputView;
