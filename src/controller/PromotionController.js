@@ -1,5 +1,9 @@
+import Badge from "../domain/Badge.js";
 import ChristmasDdayDiscount from "../domain/ChristmasDdayDiscount.js";
 import GiveAwayEvent from "../domain/GiveAwayEvent.js";
+import SpecialDiscount from "../domain/SpecialDiscount.js";
+import TotalBenefitPrice from "../domain/TotalBenefitPrice.js";
+import TotalPriceAfterDiscount from "../domain/TotalPriceAfterDiscount.js";
 import TotalPriceBeforeDiscount from "../domain/TotalPriceBeforeDiscount.js";
 import WeekdayDiscount from "../domain/WeekdayDiscount.js";
 import WeekendDiscount from "../domain/WeekendDiscount.js";
@@ -20,8 +24,16 @@ class PromotionController {
     #christmasDiscountAmount;
     #weekdayDiscount;
     #weekendDiscount;
+    #specialDiscount;
     #weekdayDiscountTotal;
     #weekendDiscountTotal;
+    #specialDiscountTotal;
+    #totalBenefit;
+    #totalBenefitPrice;
+    #afterBenefit;
+    #totalafterBenefit;
+    #badgeFunc;
+    #badge;
 
     constructor() {
         this.#outputView = new OutputView();
@@ -31,6 +43,10 @@ class PromotionController {
         this.#giveAwayEvent = new GiveAwayEvent();
         this.#weekdayDiscount = new WeekdayDiscount();
         this.#weekendDiscount = new WeekendDiscount();
+        this.#specialDiscount = new SpecialDiscount();
+        this.#totalBenefit = new TotalBenefitPrice();
+        this.#afterBenefit = new TotalPriceAfterDiscount();
+        this.#badgeFunc = new Badge();
     }
     
     intro() {
@@ -51,13 +67,17 @@ class PromotionController {
         await this.#relatedDiscount();
     }
     async #relatedDiscount() {
-        this.#christmasDiscountAmount = await this.#christmasDdayDiscount.discountAmount(this.#visitDate);
+        this.#christmasDiscountAmount = this.#christmasDdayDiscount.discountAmount(this.#visitDate);
         this.#giveAway = this.#giveAwayEvent.giveAway(this.#totalPrice);
-        this.#weekdayDiscountTotal = await this.#weekdayDiscount.weekdayDiscount(this.#visitDate,this.#orderMenu);
+        this.#weekdayDiscountTotal = this.#weekdayDiscount.weekdayDiscount(this.#visitDate,this.#orderMenu);
         this.#weekendDiscountTotal = this.#weekendDiscount.weekendDiscount(this.#visitDate,this.#orderMenu);
-        console.log(this.#christmasDiscountAmount);
-        console.log(this.#weekdayDiscountTotal);
-        console.log(this.#weekendDiscountTotal);
+        this.#specialDiscountTotal = this.#specialDiscount.specialDiscount(this.#visitDate);
+        this.#totalBenefitPrice = this.#totalBenefit.totalBenefitPrice(this.#christmasDiscountAmount,this.#weekdayDiscountTotal,this.#weekendDiscountTotal,this.#specialDiscountTotal,this.#giveAway);
+        this.#totalafterBenefit = this.#afterBenefit.totalPriceAfterDiscount(this.#totalPrice,this.#christmasDiscountAmount,this.#weekdayDiscountTotal,this.#weekendDiscountTotal,this.#specialDiscountTotal);
+        await this.#badgeResult();
+    }
+    async #badgeResult() {
+        this.#badge = this.#badgeFunc.badge(this.#totalBenefitPrice);
         this.#displayResult();
     }
     #displayResult() {
@@ -65,10 +85,10 @@ class PromotionController {
         this.#outputView.printMenu(this.#orderMenu);
         this.#outputView.printTotalPriceBeforeDiscount(this.#commaPrice);
         this.#outputView.printGiveAwayMenu(this.#giveAway);
-        this.#outputView.printBenefitDetails();
-        this.#outputView.printTotalBenefitPrice();
-        this.#outputView.printTotalPriceAfterDiscount();
-        this.#outputView.printBadge();
+        this.#outputView.printBenefitDetails(this.#christmasDiscountAmount,this.#weekdayDiscountTotal,this.#weekendDiscountTotal,this.#specialDiscountTotal);
+        this.#outputView.printTotalBenefitPrice(this.#totalBenefitPrice);
+        this.#outputView.printTotalPriceAfterDiscount(this.#totalafterBenefit);
+        this.#outputView.printBadge(this.#badge);
     }
 }
 export default PromotionController;
