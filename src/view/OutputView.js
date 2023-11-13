@@ -19,13 +19,14 @@ class OutputView {
         Console.print(`${OUTPUT_MESSAGE.totalPriceBeforeDiscount}`);
         Console.print(`${price}${OUTPUT_MESSAGE.won}`);
     }
-    printGiveAwayMenu() {
+    printGiveAwayMenu(gift) {
         Console.print(`${OUTPUT_MESSAGE.giveAwayMenu}`);
-
+        if(gift === 0) Console.print(OUTPUT_MESSAGE.none);
+        else Console.print(`${Object.keys(gift)} ${Object.values(gift)}${OUTPUT_MESSAGE.quantity}`)
     }
     printBenefitDetails() {
         Console.print(`${OUTPUT_MESSAGE.benefitDetails}`);
-    
+        
     }
     printTotalBenefitPrice() {
         Console.print(`${OUTPUT_MESSAGE.totalBenefitPrice}`);
