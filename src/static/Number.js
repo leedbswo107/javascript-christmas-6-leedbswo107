@@ -3,6 +3,9 @@ const NUMBER = {
     eventEnd : 31,
     eventTarget : 10000,
 
+    maxAmount : 20,
+    // minAmount : 
+
     weekdayDiscount : 2023,
     weekendDiscount : 2023,
     specialDiscount : 1000,
