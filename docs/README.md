@@ -4,43 +4,78 @@
     - 방문 날짜
     - 주문할 메뉴
     - 주문할 메뉴 개수
+
 2. 이벤트 조건
-    
+    - 크리스마스 디데이 할인
+        - 이벤트 기간 : 1일 부터 25일 까지 진행
+        - 1,000원으로 시작하여 크리스마스 날까지 날마다 100원씩 증가
+        - 총주문 금액에서 해당 금액만큼 할인
+    - 평일 할인
+        - 일요일 에서 목요일 까지를 평일로 설정
+        - 디저트 메뉴를 1개당 2,023원 할인
+    - 주말 할인
+        - 금요일 과 토요일 을 주말로 설정
+        - 메인 메뉴를 1개당 2,023원 할인
+    - 특별 할인
+        - 달력에 별이 있는 날 (3,10,17,24,25,31) 을 특별 할인 날짜로 설정
+        - 총주문 금액에서 1,000원 할인
+    - 증정 이벤트
+        - 할인 전 총주문 금액이 12만원 이상일 때, 샴페인 1개 증정
+    - 배지 증정
+        - 총 혜택 금액에 따라 이벤트 배지 부여
+            - 5천원 이상, 1만원 미만 : :star: 별
+            - 1만원 이상, 2만원 미만 : :christmas_tree: 트리
+            - 2만원 이상 : :santa: 산타
 
 3. 추가 조건
     - 메뉴를 입력한 후 개수를 입력할 때 0이상 100미만 값만 입력 할 수 있게 정규식으로 제한.
+    - 메뉴는 한번에 총 20개 까지만 주문 할 수 있음
+    - 
 
 4. 예외 처리
-    [ERROR] 금액 표시에 숫자 3자리(천단위) 마다 콤마(,)가 없는 경우
-    [ERROR] 입력된 방문 날짜가 1과 31 사이 값이 아닌 경우
-    [ERROR] 입력된 방문 날짜가 숫자가 아닌 경우
-    [ERROR] 메뉴판에 없는 메뉴를 입력한 경우
-    [ERROR] 음료수만 주문하는 경우
-    [ERROR] 입력된 메뉴의 개수가 1이상의 값이 아닌 경우
-    [ERROR] 입력된 메뉴의 개수가 숫자가 아닌 경우
-    [ERROR] 입력된 메뉴의 형식이 예시와 다른 경우
-    [ERROR] 중복된 메뉴를 입력한 경우
-    [ERROR] 혜택 내역 금액 앞 마이너스(-) 표시가 없는 경우
-    [ERROR] 혜택 내역 금액이 숫자가 아닌 경우?
-    [ERROR] 
-    [ERROR] 
-    [ERROR] 
+    - [ERROR] 입력된 방문 날짜가 1과 31 사이 값이 아닌 경우
+    - [ERROR] 입력된 방문 날짜가 숫자가 아닌 경우
+    - [ERROR] 메뉴판에 없는 메뉴를 입력한 경우
+    - [ERROR] 음료수만 주문하는 경우
+    - [ERROR] 입력된 메뉴의 개수가 1이상의 값이 아닌 경우
+    - [ERROR] 입력된 메뉴의 형식이 예시와 다른 경우
+    - [ERROR] 중복된 메뉴를 입력한 경우
+    - [ERROR] 총 주문량이 20을 초과하는 경우
 
 ## :heavy_plus_sign: 추가한 기능
 - 
 ## :airplane: 테스트 결과
--
+- ![크리스마스 프로모션](https://github.com/leedbswo107/javascript-christmas-6-leedbswo107/blob/leedbswo107/docs/christmasPass.png)
 ## :file_folder: 파일 구조 및 파일명
 - :open_file_folder: src 
     - :open_file_folder: common
-        - :memo: outputMessage.js
-        - :memo: Validate.js
+        - :memo: Validator.js
     - :open_file_folder: controller
-        - :memo: LottoController.js
+        - :memo: PromotionController.js
+    - :open_file_folder: domain
+        - :memo: Badge.js
+        - :memo: ChristmasDdayDiscount.js
+        - :memo: GiveAwayEvent.js
+        - :memo: OrderMenu.js
+        - :memo: SpecialDiscount.js
+        - :memo: TotalBenefitPrice.js
+        - :memo: TotalPriceAfterDiscount.js
+        - :memo: TotalPriceBeforeDiscount.js
+        - :memo: WeekdayDessertCount.js
+        - :memo: WeekdayDiscount.js
+        - :memo: WeekendDiscount.js
+        - :memo: WeekendMaindishCount.js
+    - :open_file_folder: static
+        - :memo: Error.js
+        - :memo: Message.js
+        - :memo: Number.js
+        - :memo: Price.js
+        - :memo: Rule.js
+    - :open_file_folder: view
+        - :memo: InputView.js
+        - :memo: OutputView.js
     - :memo: App.js
     - :memo: index.js
-    - :memo: Lotto.js
-    - :memo: LottoPlay.js
 
 ## :book: 커밋 컨벤션
 - 자주 사용하는 태그 종류
