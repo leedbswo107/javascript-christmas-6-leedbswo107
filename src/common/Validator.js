@@ -12,7 +12,7 @@ class Validator {
     validateMenuPattern(menu) {
         let pattern =  RULE.menuInputRule;
         if(pattern.test(menu) === false) throw new Error(`${ERROR.MENU_ERROR}`);
-    }
+    }   
     validateCorrectMenu(menu) {
         if((menu in PRICE.APPETIZER || menu in PRICE.MAIN || menu in PRICE.DESSERT || menu in PRICE.DRINKS) !== true) throw new Error(`${ERROR.MENU_ERROR}`);
     }
@@ -27,7 +27,7 @@ class Validator {
         setMenu.forEach(element => {
             if(element in PRICE.DRINKS) count ++;
         });
-        if(count === setMenu.size) throw new Error(`${ERROR.ONLY_DRINKS_ERROR}`);
+        if(count === setMenu.size) throw new Error(`${ERROR.MENU_ERROR}`);
     }
     validateOrderAmount(amount) {
         const menuAmount = Object.values(amount);
