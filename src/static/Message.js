@@ -17,7 +17,6 @@ const OUTPUT_MESSAGE = Object.freeze({
     none : "없음",
     won : "원",
     quantity : "개",
-    // 콤마가 필요한 경우 여기서
 });
 const BADGE = Object.freeze({
     star : '별',
