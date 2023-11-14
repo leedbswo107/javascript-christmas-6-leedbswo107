@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { OUTPUT_MESSAGE } from "../static/message.js";
 import PRICE from "../static/Price.js";
+import RULE from "../static/Rule.js";
 
 class OutputView {
     printResultIntro(date) {
@@ -8,9 +9,7 @@ class OutputView {
     }
     printMenu(menu) {
         Console.print(`${(OUTPUT_MESSAGE.orderMenu)}`);
-        for (const key in menu) {
-            Console.print(`${key} ${menu[key]}${OUTPUT_MESSAGE.quantity}`);
-        }
+        Console.print(Object.entries(menu).map(([key, value]) => `${key} ${value}${OUTPUT_MESSAGE.quantity}`).join('\n'));
     }
     printTotalPriceBeforeDiscount(price) {
         Console.print(`${OUTPUT_MESSAGE.totalPriceBeforeDiscount}`);
@@ -21,32 +20,44 @@ class OutputView {
         if(gift === 0) Console.print(OUTPUT_MESSAGE.none);
         else Console.print(`${Object.keys(gift)} ${Object.values(gift)}${OUTPUT_MESSAGE.quantity}`)
     }
-    //함수 분리 필요 함
     printBenefitDetails(dday,weekday,weekend,special,giveAway) {
-        //혜택 내역
         Console.print(`${OUTPUT_MESSAGE.benefitDetails}`);
-        
-        if(Number(Object.values(dday)) !== 0) Console.print(`${Object.keys(dday)}: -${Object.values(dday).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
-        if(Number(Object.values(weekday)) !== 0) Console.print(`${Object.keys(weekday)}: -${Object.values(weekday).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
-        if(Number(Object.values(weekend)) !== 0) Console.print(`${Object.keys(weekend)}: -${Object.values(weekend).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
-        if(Number(Object.values(special)) !== 0) Console.print(`${Object.keys(special)}: -${Object.values(special).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
-        if(Number(Object.values(giveAway)) !== 0) Console.print(`${Object.keys(giveAway)}: -${PRICE.DRINKS.샴페인.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
+        if(Number(Object.values(dday)) !== 0) Console.print(`${OUTPUT_MESSAGE.ddayEvent}: -${Object.values(dday).toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
+        if(Number(Object.values(weekday)) !== 0) Console.print(`${OUTPUT_MESSAGE.weekdayEvent}: -${Object.values(weekday).toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
+        if(Number(Object.values(weekend)) !== 0) Console.print(`${OUTPUT_MESSAGE.weekendEvent}: -${Object.values(weekend).toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
+        if(Number(Object.values(special)) !== 0) Console.print(`${OUTPUT_MESSAGE.specialEvent}: -${Object.values(special).toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
+        if(Number(Object.values(giveAway)) !== 0) Console.print(`${OUTPUT_MESSAGE.giveAwayEvent}: -${PRICE.DRINKS.샴페인.toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
         if(((Number(Object.values(dday)) === 0) && (Number(Object.values(weekday)) === 0) && (Number(Object.values(weekend)) === 0) && (Number(Object.values(special)) === 0) && (giveAway === 0)) === true) Console.print(OUTPUT_MESSAGE.none);
     }
-    //if 절 분리 필요
     printTotalBenefitPrice(total) {
         Console.print(`${OUTPUT_MESSAGE.totalBenefitPrice}`);
-        if(total === 0) Console.print(`${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
-        else Console.print(`-${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
+        // if(total === 0) Console.print(`${total.toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
+        // else Console.print(`-${total.toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
+        switch (true) {
+            case total === 0:
+              Console.print(`${total.toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
+              break;
+            default:
+              Console.print(`-${total.toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
+              break;
+          }
     }
     printTotalPriceAfterDiscount(price) {
         Console.print(`${OUTPUT_MESSAGE.totalPriceAfterDiscount}`);
-        Console.print(`${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${OUTPUT_MESSAGE.won}`);
+        Console.print(`${price.toString().replace(RULE.thousandUnitsRule, ",")}${OUTPUT_MESSAGE.won}`);
     }
     printBadge(badge) {
         Console.print(`${OUTPUT_MESSAGE.badge}`);
-        if(badge === 0) Console.print(`${OUTPUT_MESSAGE.none}`);
-        else Console.print(`${badge}`);
+        // if(badge === 0) Console.print(`${OUTPUT_MESSAGE.none}`);
+        // else Console.print(`${badge}`);
+        switch (badge) {
+            case 0:
+              Console.print(`${OUTPUT_MESSAGE.none}`);
+              break;
+            default:
+              Console.print(`${badge}`);
+              break;
+        }
     }
 }
 export default OutputView;
