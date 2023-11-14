@@ -9,7 +9,8 @@ class ChristmasDdayDiscount {
             dDay['크리스마스 디데이 할인'] = Number(discountAmount);
             return dDay;
         }
-        return 0;
+        dDay['크리스마스 디데이 할인'] = 0;
+        return dDay;
     }
 }
 export default ChristmasDdayDiscount;
