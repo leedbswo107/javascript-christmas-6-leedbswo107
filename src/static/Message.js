@@ -4,6 +4,11 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const OUTPUT_MESSAGE = Object.freeze({
+    ddayEvent : "크리스마스 디데이 할인",
+    weekdayEvent : "평일 할인",
+    weekendEvent : "주말 할인",
+    specialEvent : "특별 할인",
+    giveAwayEvent : "증정 이벤트",
     intro : "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.",
     previewFront : "12월 ",
     previewBack : "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!",
