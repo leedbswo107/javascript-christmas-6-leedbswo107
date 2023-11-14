@@ -7,7 +7,8 @@ class SpecialDiscount {
             special['특별 할인'] = Number(NUMBER.specialDiscount);
             return special;
         }
-        return 0;
+        special['특별 할인'] = 0;
+        return special;
     }
 }
 export default SpecialDiscount;
