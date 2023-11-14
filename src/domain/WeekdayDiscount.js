@@ -14,7 +14,8 @@ class WeekdayDiscount {
             weekday['평일 할인'] = Number(weekdayDiscountTotal);
             return weekday;
         }
-        return 0;
+        weekday['평일 할인'] = 0;
+        return weekday;
     }
 }
 export default WeekdayDiscount;
