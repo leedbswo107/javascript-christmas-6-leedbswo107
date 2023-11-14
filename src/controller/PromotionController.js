@@ -7,6 +7,7 @@ import TotalPriceAfterDiscount from "../domain/TotalPriceAfterDiscount.js";
 import TotalPriceBeforeDiscount from "../domain/TotalPriceBeforeDiscount.js";
 import WeekdayDiscount from "../domain/WeekdayDiscount.js";
 import WeekendDiscount from "../domain/WeekendDiscount.js";
+import RULE from "../static/Rule.js";
 import InputView from "../view/InputView.js";
 import OutputView from "../view/OutputView.js";
 
@@ -56,15 +57,15 @@ class PromotionController {
     }
     async relatedPrice() {
         this.#totalPrice = this.#totalPriceBeforeDiscount.totalPrice(this.#orderMenu);
-        this.#commaPrice = await this.#totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        this.#commaPrice = await this.#totalPrice.toString().replace(RULE.thousandUnitsRule, ",");
         this.relatedDiscount();
     }
     relatedDiscount() {
-        this.#christmasDiscountAmount = this.#christmasDdayDiscount.discountAmount(this.#visitDate);
+        this.#christmasDiscountAmount = this.#christmasDdayDiscount.discountAmount(this.#visitDate,this.#totalPrice);
         this.#giveAway = this.#giveAwayEvent.giveAway(this.#totalPrice);
-        this.#weekdayDiscountTotal = this.#weekdayDiscount.weekdayDiscount(this.#visitDate,this.#orderMenu);
-        this.#weekendDiscountTotal = this.#weekendDiscount.weekendDiscount(this.#visitDate,this.#orderMenu);
-        this.#specialDiscountTotal = this.#specialDiscount.specialDiscount(this.#visitDate);
+        this.#weekdayDiscountTotal = this.#weekdayDiscount.weekdayDiscount(this.#visitDate,this.#orderMenu,this.#totalPrice);
+        this.#weekendDiscountTotal = this.#weekendDiscount.weekendDiscount(this.#visitDate,this.#orderMenu,this.#totalPrice);
+        this.#specialDiscountTotal = this.#specialDiscount.specialDiscount(this.#visitDate,this.#totalPrice);
         this.#totalBenefitPrice = this.#totalBenefit.totalBenefitPrice(this.#christmasDiscountAmount,this.#weekdayDiscountTotal,this.#weekendDiscountTotal,this.#specialDiscountTotal,this.#giveAway);
         this.#totalafterBenefit = this.#afterBenefit.totalPriceAfterDiscount(this.#totalPrice,this.#christmasDiscountAmount,this.#weekdayDiscountTotal,this.#weekendDiscountTotal,this.#specialDiscountTotal);
         this.badgeResult();
