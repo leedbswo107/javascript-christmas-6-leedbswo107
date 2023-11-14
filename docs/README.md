@@ -42,8 +42,6 @@
     - [ERROR] 중복된 메뉴를 입력한 경우
     - [ERROR] 총 주문량이 20을 초과하는 경우
 
-## :heavy_plus_sign: 추가한 기능
-- 
 ## :airplane: 테스트 결과
 - ![크리스마스 프로모션](https://github.com/leedbswo107/javascript-christmas-6-leedbswo107/blob/leedbswo107/docs/christmasPass.png)
 ## :file_folder: 파일 구조 및 파일명
