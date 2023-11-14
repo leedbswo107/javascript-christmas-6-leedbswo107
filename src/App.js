@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import PromotionController from "./controller/PromotionController.js";
 
 class App {
@@ -8,9 +9,9 @@ class App {
   }
   async run() {
     try {
-      this.#promotion.intro();
+      await this.#promotion.inputArea();
     } catch (error) {
-      
+      Console.print(error.message);
     }
   }
 }
