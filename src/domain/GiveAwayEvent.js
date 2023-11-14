@@ -6,7 +6,7 @@ class GiveAwayEvent {
         if(totalPrice > NUMBER.GIVEAWAYEVENT) {
             giveAwayChampagne.샴페인 = 1;
             return giveAwayChampagne; 
-        }
+        } 
         return 0;
     }
 }
