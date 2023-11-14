@@ -1,9 +1,9 @@
 import NUMBER from "../static/Number.js";
 
 class GiveAwayEvent {
-    giveAway(totalPrice){
+    giveAway(total){
         let giveAwayChampagne = new Object();
-        if(totalPrice > NUMBER.GIVEAWAYEVENT) {
+        if(total >= NUMBER.GIVEAWAYEVENT) {
             giveAwayChampagne.샴페인 = 1;
             return giveAwayChampagne; 
         } 

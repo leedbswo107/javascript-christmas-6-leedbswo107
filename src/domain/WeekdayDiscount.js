@@ -5,11 +5,11 @@ class WeekdayDiscount {
     constructor() {
         this.weekdayDessertCount = new WeekdayDessertCount();
     }
-    weekdayDiscount(day,dessert) {
+    weekdayDiscount(day,dessert,total) {
         let weekdayDiscountTotal = 0;
         const weekday = new Object();
         let dessertCount = this.weekdayDessertCount.dessertCount(dessert);
-        if(NUMBER.weekday.includes(day) === true) {
+        if(total >= NUMBER.eventTarget && NUMBER.weekday.includes(day) === true) {
             weekdayDiscountTotal = (NUMBER.weekdayDiscount)*dessertCount;
             weekday['평일 할인'] = Number(weekdayDiscountTotal);
             return weekday;
