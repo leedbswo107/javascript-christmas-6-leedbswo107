@@ -14,7 +14,8 @@ class WeekendDiscount {
             weekend['주말 할인'] = Number(weekendDiscountTotal);
             return weekend;
         }
-        return 0;
+        weekend['주말 할인'] = 0;
+        return weekend;
     }
 }
 export default WeekendDiscount;
