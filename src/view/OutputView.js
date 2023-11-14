@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { OUTPUT_MESSAGE } from "../static/message.js";
+import { OUTPUT_MESSAGE } from "../static/Message.js";
 import PRICE from "../static/Price.js";
 import RULE from "../static/Rule.js";
 

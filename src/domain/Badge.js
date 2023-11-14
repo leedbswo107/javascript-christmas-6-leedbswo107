@@ -1,5 +1,5 @@
 import NUMBER from "../static/Number.js";
-import { BADGE } from "../static/message.js";
+import { BADGE } from "../static/Message.js";
 
 class Badge{
     badge(price) {
