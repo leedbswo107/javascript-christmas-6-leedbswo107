@@ -7,7 +7,7 @@ class Validator {
     constructor() {}
     validateVisitDate(date) {
         if(isNaN(date)) throw new Error(`${ERROR.DATE_ERROR}`);
-        if(date < 1 || date > 31) throw new Error(`${ERROR.DATE_ERROR}`);
+        if(date < NUMBER.eventStart || date > NUMBER.eventEnd) throw new Error(`${ERROR.DATE_ERROR}`);
     }
     validateMenuPattern(menu) {
         let pattern =  RULE.menuInputRule;
