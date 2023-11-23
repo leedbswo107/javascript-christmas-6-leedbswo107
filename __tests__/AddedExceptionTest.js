@@ -17,10 +17,10 @@ const getLogSpy = () => {
 
   return logSpy;
 };
+const INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
 
 describe("추가 예외 테스트", () => {
   test("날짜 예외 테스트 1~31 범위", async () => {
-    const INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     const INPUTS_TO_END = ["31", "해산물파스타-2"];
     const logSpy = getLogSpy();
     mockQuestions(["0","34","32", ...INPUTS_TO_END]);
@@ -31,7 +31,6 @@ describe("추가 예외 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_DATE_MESSAGE));
   });
   test("날짜 예외 테스트 NaN", async () => {
-    const INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     const INPUTS_TO_END = ["1", "해산물파스타-2"];
     const logSpy = getLogSpy();
     mockQuestions([
@@ -44,8 +43,9 @@ describe("추가 예외 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_DATE_MESSAGE));
   });
 
+  const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+
   test("주문 예외 테스트 음료만 주문", async () => {
-    const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     const INPUTS_TO_END = ["해산물파스타-2,샴페인-4"];
     const logSpy = getLogSpy();
     mockQuestions([
@@ -59,7 +59,6 @@ describe("추가 예외 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_ORDER_MESSAGE));
   });
   test("주문 예외 테스트 없는 메뉴", async () => {
-    const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     const INPUTS_TO_END = ["해산물파스타-2,샴페인-4"];
     const logSpy = getLogSpy();
     mockQuestions([
@@ -73,7 +72,6 @@ describe("추가 예외 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_ORDER_MESSAGE));
   });
   test("주문 예외 테스트 주문 수량 0인경우", async () => {
-    const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     const INPUTS_TO_END = ["해산물파스타-2,샴페인-4"];
     const logSpy = getLogSpy();
     mockQuestions([
@@ -88,7 +86,6 @@ describe("추가 예외 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_ORDER_MESSAGE));
   });
   test("주문 예외 테스트 주문 수량 NaN", async () => {
-    const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     const INPUTS_TO_END = ["해산물파스타-2,샴페인-4"];
     const logSpy = getLogSpy();
     mockQuestions([
@@ -103,7 +100,6 @@ describe("추가 예외 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_ORDER_MESSAGE));
   });
   test("주문 예외 테스트 주문 총수량이 20 초과", async () => {
-    const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     const INPUTS_TO_END = ["해산물파스타-2,샴페인-4"];
     const logSpy = getLogSpy();
     mockQuestions([
@@ -117,4 +113,16 @@ describe("추가 예외 테스트", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_ORDER_MESSAGE));
   });
+  test("주문 예외 테스트 중복된 주문", async () => {
+    const INPUTS_TO_END = ["해산물파스타-2,샴페인-4"];
+    const logSpy = getLogSpy();
+    mockQuestions([
+      "3", "해산물파스타-2,샴페인-4,해산물파스타-1",
+      "티본스테이크4,타파스-1,양송이수프-2,티본스테이크-1",
+      ...INPUTS_TO_END]);
+      const app = new App();
+    await app.run();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_ORDER_MESSAGE));
+  })
 });
