@@ -167,14 +167,26 @@ describe("TotalPriceAfterDiscount 함수 테스트", () => {
 
 describe("TotalPriceBeforeDiscount 함수 테스트", () => {
   const totalPriceBeforeDiscountFunc = new TotalPriceBeforeDiscount();
-  const menu = {
+  const menuFirst = {
     '티본스테이크' : 1,
+    '타파스' : 1,
     '해산물파스타' : 1,
     '제로콜라' : 2,
     '아이스크림' : 1,
   };
-  test('티본스테이크 1개, 해산물파스타 1개, 제로콜라 2개, 아이스크림 1개', async function() {
-    expect(totalPriceBeforeDiscountFunc.totalPrice(menu)).toBe(101000);
+  const menuSecond = {
+    '바비큐립' : 1,
+    '타파스' : 1,
+    '크리스마스파스타' : 2,
+    '제로콜라' : 2,
+    '아이스크림' : 5,
+    '초코케이크' : 2,
+  };
+  test('티본스테이크 1개, 타파스 1개, 해산물파스타 1개, 제로콜라 2개, 아이스크림 1개', async function() {
+    expect(totalPriceBeforeDiscountFunc.totalPrice(menuFirst)).toBe(106500);
+  });
+  test('바비큐립 1개, 타파스 1개, 크리스마스파스타 2개, 제로콜라 2개, 아이스크림 5개, 초코케이크 2개', async function() {
+    expect(totalPriceBeforeDiscountFunc.totalPrice(menuSecond)).toBe(170500);
   });
 });
 
