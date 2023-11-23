@@ -1,6 +1,3 @@
-import App from "../src/App.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
-import { EOL as LINE_SEPARATOR } from "os";
 import Badge from "../src/domain/Badge.js";
 import ChristmasDdayDiscount from "../src/domain/ChristmasDdayDiscount.js";
 import GiveAwayEvent from "../src/domain/GiveAwayEvent.js";
@@ -13,33 +10,6 @@ import WeekdayDessertCount from "../src/domain/WeekdayDessertCount.js";
 import WeekendMaindishCount from "../src/domain/WeekendMaindishCount.js";
 import WeekendDiscount from "../src/domain/WeekendDiscount.js";
 import WeekdayDiscount from "../src/domain/WeekdayDiscount.js";
-
-const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
-
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-
-    return Promise.resolve(input);
-  });
-};
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
-  logSpy.mockClear();
-
-  return logSpy;
-};
-
-const getOutput = (logSpy) => {
-  return [...logSpy.mock.calls].join(LINE_SEPARATOR);
-};
-
-const expectLogContains = (received, expectedLogs) => {
-  expectedLogs.forEach((log) => {
-    expect(received).toContain(log);
-  });
-};
 
 describe("Badge 함수 테스트", () => {
   const badge = new Badge();
@@ -182,11 +152,19 @@ describe("TotalPriceBeforeDiscount 함수 테스트", () => {
     '아이스크림' : 5,
     '초코케이크' : 2,
   };
+  const menuThird = {
+    '바비큐립' : 1,
+    '타파스' : 1,
+  };
+
   test('티본스테이크 1개, 타파스 1개, 해산물파스타 1개, 제로콜라 2개, 아이스크림 1개', async function() {
     expect(totalPriceBeforeDiscountFunc.totalPrice(menuFirst)).toBe(106500);
   });
   test('바비큐립 1개, 타파스 1개, 크리스마스파스타 2개, 제로콜라 2개, 아이스크림 5개, 초코케이크 2개', async function() {
     expect(totalPriceBeforeDiscountFunc.totalPrice(menuSecond)).toBe(170500);
+  });
+  test('바비큐립 1개, 타파스 1개', async function() {
+    expect(totalPriceBeforeDiscountFunc.totalPrice(menuThird)).toBe(59500);
   });
 });
 
